@@ -86,7 +86,7 @@ acme==1.8.0
 appdirs==1.4.4
 astral==1.10.1
 atomicwrites==1.4.0
-attr==0.3.1
+#attr==0.3.1
 distlib==0.3.1
 filelock==3.0.12
 PyJWT==1.7.1

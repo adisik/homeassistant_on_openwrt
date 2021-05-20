@@ -72,6 +72,7 @@ opkg install \
   python3-netdisco \
   python3-zeroconf \
   python3-pillow \
+  python3-bluepy \
   python3-cryptodomex
 
 cd /tmp/
@@ -148,9 +149,29 @@ websocket-client==0.56.0
 samsungctl[websocket]==0.7.1
 samsungtvws==1.4.0
 
+# tuya
+tuyaha==0.0.9
+
 # mobile_app
 emoji==0.5.4
 
+# bluetooth
+nose==1.3.7
+coverage==3.7.1
+pygatt[GATTTOOL]==4.0.5
+mitemp_bt==0.0.3
+btlewrap==0.0.8
+typing==3.7.4.3
+
+#yandex_transport
+aioymaps==1.1.0
+
+#esphome
+aioesphomeapi==2.6.3
+protobuf==3.15.8
+
+#scrape
+beautifulsoup4==4.9.1
 
 # zha requirements
 pyserial==3.5
@@ -268,6 +289,7 @@ mv -f \
   auth \
   automation \
   binary_sensor \
+  bluetooth_le_tracker \
   camera \
   climate \
   cloud \
@@ -277,8 +299,11 @@ mv -f \
   cover \
   default_config \
   device_automation \
-  device_tracker \
+  device_tracker \ 
+  esphome\ 
   fan \
+  file\
+  filter \
   frontend \
   generic \
   google_assistant \
@@ -298,6 +323,7 @@ mv -f \
   ipp \
   light \
   lock \
+  local_ip \
   logger \
   logbook \
   lovelace \
@@ -317,9 +343,11 @@ mv -f \
   recorder \
   remote \
   rest \
+  rest_command \
   samsungtv \
   scene \
   script \
+  scrape \
   search \
   sensor \
   shopping_list \
@@ -327,6 +355,7 @@ mv -f \
   stream \
   sun \
   switch \
+  statistics \
   system_health \
   system_log \
   shell_command \
@@ -338,10 +367,12 @@ mv -f \
   time_date \
   tod \
   tts \
+  tuya \
   updater \
   vacuum \
   weather \
   webhook \
+  wake_on_lan\
   websocket_api \
   xiaomi_aqara \
   xiaomi_miio \
@@ -361,6 +392,7 @@ mv -f \
   uptime \
   workday \
   version \
+  yandex_transport \
   mpd \
   ../components
 cd ..

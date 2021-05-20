@@ -92,7 +92,7 @@ filelock==3.0.12
 PyJWT==1.7.1
 jwt==1.2.0
 python-slugify==5.0.0
-slugify==0.0.1
+#slugify==0.0.1
 text-unidecode==1.3
 voluptuous==0.12.1
 voluptuous-serialize==2.4.0

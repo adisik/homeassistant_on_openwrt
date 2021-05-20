@@ -1,0 +1,28 @@
+Инструкция для все у кого возникает проблема с добавлением #telegram в HA.
+Добавляем #телеграм в HomeAssistant на шлюзе. 
+Ставим пакеты:
+pip3 install python-telegram-bot==13.1
+pip3 install PySocks==1.7.1
+pip3 install decorator==4.4.2 
+pip3 install tornado==6.1
+pip3 install tzlocal==2.1 
+pip3 install APScheduler==3.6.3
+
+Качаем архив и распаковываем у себя на ПК:
+https://files.pythonhosted.org/packages/99/a0/dfb23c5fcf168825964cc367fd9d3ff62636b7f056077656e87880b1a356/homeassistant-2021.1.5.tar.gz
+
+В распакованной папке переходим в 
+\homeassistant-2021.1.5\homeassistant\components\
+
+копируем оттуда папки: 
+telegram
+telegram_bot
+на шлюз в:
+/usr/lib/python3.7/site-packages/homeassistant-2021.1.5-py3.7.egg/homeassistant/components
+копируем с помощью WinSCP(Устанавливаем протокол SCP)
+
+Аналогично можно добавить в НА почти любой компонент.
+В каждой папке с компонентом есть файл manifest.json,
+открываем его и смотрим, 
+"requirements": перечислены пакеты которые нужно установить для работы этого компонента (если они не установлены).
+"dependencies": - зависимости от других компонентов, которые тоже должны быть установлены.

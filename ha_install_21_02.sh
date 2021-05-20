@@ -72,7 +72,7 @@ opkg install \
   python3-netdisco \
   python3-zeroconf \
   python3-pillow \
-  python3-bluepy \
+#  python3-bluepy \
   python3-cryptodomex
 
 cd /tmp/

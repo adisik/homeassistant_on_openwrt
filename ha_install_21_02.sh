@@ -110,7 +110,7 @@ gTTS==2.2.1
 python-telegram-bot==13.1
 PySocks==1.7.1
 decorator==4.4.2 
-tornado==6.1
+# tornado==6.1
 tzlocal==2.1 
 APScheduler==3.6.3
 
@@ -131,7 +131,7 @@ async-upnp-client==0.14.13
 paho-mqtt==1.5.0
 
 # coronavirus
-coronavirus==1.1.1
+# coronavirus==1.1.1
 
 # version
 pyhaversion==3.4.2

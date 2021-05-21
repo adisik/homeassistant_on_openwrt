@@ -101,7 +101,7 @@ snitun==0.20
 
 # homeassistant manifest requirements
 # PyQRCode==1.2.1
-pyMetno==0.8.1
+pyMetno==0.8.3
 mutagen==1.45.1
 pyotp==2.3.0
 gTTS==2.2.1

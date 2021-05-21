@@ -4,7 +4,7 @@
 set -e
 
 echo "Install base requirements from feed..."
-opkg update
+# opkg update
 
 # Install them first to check Openlumi feed id added
 opkg install \
@@ -165,7 +165,7 @@ nose==1.3.7
 # coverage==3.7.1
 # pygatt[GATTTOOL]==4.0.5
 mitemp_bt==0.0.3
-btlewrap==0.0.8
+# btlewrap==0.0.8
 typing==3.7.4.3
 
 #yandex_transport

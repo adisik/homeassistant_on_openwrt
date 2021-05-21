@@ -42,6 +42,8 @@ Then, download the installer and run it.
 
 ```sh
 wget https://raw.githubusercontent.com/adisik/homeassistant_on_openwrt/main/ha_install.sh -O - | sh
+or
+wget https://raw.githubusercontent.com/adisik/homeassistant_on_openwrt/main/ha_install_21_02.sh -O - | sh
 ```
 
 After script prints `Done.` you have Home Assistant installed. 

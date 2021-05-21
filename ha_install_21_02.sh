@@ -166,7 +166,7 @@ nose==1.3.7
 # pygatt[GATTTOOL]==4.0.5
 mitemp_bt==0.0.3
 # btlewrap==0.0.8
-typing==3.7.4.3
+# typing==3.7.4.3
 
 #yandex_transport
 aioymaps==1.1.0

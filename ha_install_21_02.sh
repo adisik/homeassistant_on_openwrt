@@ -128,7 +128,7 @@ aioasuswrt==1.3.1
 async-upnp-client==0.14.13
 
 # xiaomi_gateway3      
-paho-mqtt==1.5.0
+# paho-mqtt==1.5.0
 
 # coronavirus
 # coronavirus==1.1.1

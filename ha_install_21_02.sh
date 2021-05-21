@@ -121,8 +121,8 @@ icmplib==2.0
 aioasuswrt==1.3.1
 
 # workday
-holidays==0.10.4
-pymeeus==0.4.0
+# holidays==0.10.4
+# pymeeus==0.4.0
 
 # ssdp    async-upnp-client==0.16.2
 async-upnp-client==0.14.13

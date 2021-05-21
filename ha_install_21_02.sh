@@ -70,10 +70,12 @@ opkg install \
   python3-yaml \
   python3-yarl \
   python3-netdisco \
+  python3-paho-mqtt \
   python3-zeroconf \
-  python3-pillow
-#  python3-cryptodomex
-#  python3-bluepy \
+  python3-pillow \
+  python3-bluepy \
+  python3-cryptodomex
+  
 
 cd /tmp/
 
@@ -139,7 +141,7 @@ pytest-runner==5.3.0
 semantic-version==2.8.5
 
 # rest
-jsonpath==0.82
+# jsonpath==0.82
 xmltodict==0.12.0
 httpx==0.16.1
 httpcore==0.12.3

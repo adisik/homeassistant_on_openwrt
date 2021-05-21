@@ -151,7 +151,7 @@ rfc3986==1.4.0
 
 # samsungtv
 websocket-client==0.56.0
-samsungctl[websocket]==0.7.1
+# samsungctl[websocket]==0.7.1
 samsungtvws==1.4.0
 
 # tuya

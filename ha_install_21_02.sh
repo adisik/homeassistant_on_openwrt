@@ -162,7 +162,7 @@ tuyaha==0.0.9
 
 # bluetooth
 nose==1.3.7
-coverage==3.7.1
+# coverage==3.7.1
 pygatt[GATTTOOL]==4.0.5
 mitemp_bt==0.0.3
 btlewrap==0.0.8

@@ -176,7 +176,7 @@ aioesphomeapi==2.6.3
 protobuf==3.15.8
 
 #scrape
-beautifulsoup4==4.9.1
+#  beautifulsoup4==4.9.1
 
 # zha requirements
 # pyserial==3.5

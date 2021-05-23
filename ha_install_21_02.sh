@@ -91,7 +91,7 @@ echo "Install _distutils_hack..."
 wget https://github.com/pypa/setuptools/archive/refs/tags/v57.0.0.tar.gz -O - > setuptools-57.0.0.tar.gz
 tar -zxf setuptools-57.0.0.tar.gz
 cd setuptools-57.0.0
-mv -f _distutils_hack /usr/lib/python3.9/site-packages/_distutils_hack
+mv -f _distutils_hack /usr/lib/python3.9/site-packages
 cd ..                                                                             
 rm -rf setuptools-57.0.0.tar.gz
 rm -rf setuptools-57.0.0
@@ -204,8 +204,8 @@ EOF
 pip3 install -r /tmp/requirements.txt
 
 # show internal serial ports for Xiaomi
-sed -i 's/ttyXRUSB\*/ttymxc[1-9]/' /usr/lib/python3.7/site-packages/serial/tools/list_ports_linux.py
-sed -i 's/if info.subsystem != "platform"]/]/' /usr/lib/python3.7/site-packages/serial/tools/list_ports_linux.py
+sed -i 's/ttyXRUSB\*/ttymxc[1-9]/' /usr/lib/python3.9/site-packages/serial/tools/list_ports_linux.py
+sed -i 's/if info.subsystem != "platform"]/]/' /usr/lib/python3.9/site-packages/serial/tools/list_ports_linux.py
 
 # fix deps
 sed -i 's/urllib3<1.25,>=1.20/urllib3<1.26,>=1.20/' /usr/lib/python3.9/site-packages/botocore-1.12.66-py3.9.egg-info/requires.txt

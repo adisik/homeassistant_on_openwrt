@@ -1,5 +1,6 @@
 #!/bin/sh
 # Homeassistant installer script by @devbis
+# wget https://raw.githubusercontent.com/adisik/homeassistant_on_openwrt/main/ha_install_21_02.sh -O - | sh
 
 set -e
 
@@ -85,6 +86,15 @@ opkg install \
 
 cd /tmp/
 
+echo "Install _distutils_hack..."
+
+wget https://github.com/pypa/setuptools/archive/refs/tags/v57.0.0.tar.gz -O - > setuptools-57.0.0.tar.gz
+tar -zxf setuptools-57.0.0.tar.gz
+cd setuptools-57.0.0
+mv -f _distutils_hack /usr/lib/python3.9/site-packages/_distutils_hack
+cd ..                                                                             
+rm -rf setuptools-57.0.0.tar.gz
+rm -rf setuptools-57.0.0
 
 echo "Install base requirements from PyPI..."
 pip3 install wheel
@@ -213,7 +223,7 @@ tar -zxf zigpy-zigate-0.7.4.tgz
 cd zigpy-zigate-0.7.4
 python3 setup.py install
 cd ..                                                                             
-rm -rf pycognito-0.1.4 pycognito-0.1.4.tgz
+rm -rf zigpy-zigate-0.7.4.tgz
 
 echo "Installing pycognito..."
 

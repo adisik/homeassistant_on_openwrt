@@ -187,7 +187,7 @@ protobuf==3.15.8
 # zha requirements
 # pyserial==3.5
 # zha-quirks==0.0.51
-# zigpy==0.30.0
+ zigpy==0.33.0
 # zigpy-zigate==0.7.3
 EOF
 
@@ -206,13 +206,22 @@ echo "Download files"
 wget https://github.com/pvizeli/pycognito/archive/0.1.4.tar.gz -O - > pycognito-0.1.4.tgz
 wget https://github.com/ctalkington/python-ipp/archive/0.11.0.tar.gz -O - > python-ipp-0.11.0.tgz
 wget https://files.pythonhosted.org/packages/b8/ad/31d10dbad025a8411029c5041129de14f9bb9f66a990de21be0011e19041/python-miio-0.5.4.tar.gz -O - > python-miio-0.5.4.tar.gz
+wget https://github.com/zigpy/zigpy-zigate/archive/0.7.4.tar.gz -O - > zigpy-zigate-0.7.4.tgz
+echo "Installing zigpy-zigate..."
+
+tar -zxf zigpy-zigate-0.7.4.tgz
+cd zigpy-zigate-0.7.4
+python3 setup.py install
+cd ..                                                                             
+rm -rf pycognito-0.1.4 pycognito-0.1.4.tgz
+
 echo "Installing pycognito..."
 
 tar -zxf pycognito-0.1.4.tgz
 cd pycognito-0.1.4
 sed -i 's/boto3>=1.10.49/boto3>=1.9.135/' setup.py
 python3 setup.py install
-cd ..
+cd ..                                                                             
 rm -rf pycognito-0.1.4 pycognito-0.1.4.tgz
 
 echo "Installing python-ipp..."

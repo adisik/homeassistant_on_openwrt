@@ -78,9 +78,9 @@ opkg install \
   python3-paho-mqtt \
   python3-zeroconf \
   python3-pillow \
-  python3-qrcode
-#  python3-bluepy \
-#  python3-cryptodomex
+  python3-qrcode \
+  python3-bluepy \
+  python3-cryptodomex
   
 
 cd /tmp/

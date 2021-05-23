@@ -91,7 +91,7 @@ echo "Install _distutils_hack..."
 wget https://github.com/pypa/setuptools/archive/refs/tags/v57.0.0.tar.gz -O - > setuptools-57.0.0.tar.gz
 tar -zxf setuptools-57.0.0.tar.gz
 cd setuptools-57.0.0
-mv -f _distutils_hack /usr/lib/python3.9/site-packages
+# mv -f _distutils_hack /usr/lib/python3.9/site-packages
 cd ..                                                                             
 rm -rf setuptools-57.0.0.tar.gz
 rm -rf setuptools-57.0.0

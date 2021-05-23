@@ -4,7 +4,7 @@
 set -e
 
 echo "Install base requirements from feed..."
-# opkg update
+opkg update
 
 # Install them first to check Openlumi feed id added
 opkg install \
@@ -38,6 +38,7 @@ opkg install \
   python3-docutils \
   python3-email \
   python3-gdbm \
+  python3-jsonpath-ng \
   python3-idna \
   python3-jinja2 \
   python3-jmespath \
@@ -50,22 +51,26 @@ opkg install \
   python3-ncurses \
   python3-netifaces \
   python3-openssl \
+  python3-paho-mqtt \
   python3-pip \
   python3-pkg-resources \
   python3-ply \
   python3-pycparser \
   python3-pydoc \
   python3-pyopenssl \
+  python3-pyserial \
   python3-pytz \
   python3-requests \
   python3-s3transfer \
   python3-setuptools \
   python3-six \
+  python3-slugify \
   python3-sqlalchemy \
   python3-sqlite3 \
   python3-unittest \
   python3-urllib \
   python3-urllib3 \
+  python3-tornado \
   python3-xml \
   python3-yaml \
   python3-yarl \
@@ -73,7 +78,8 @@ opkg install \
   python3-paho-mqtt \
   python3-zeroconf \
   python3-pillow \
-  python3-bluepy \
+  python3-qrcode \
+#  python3-bluepy \
   python3-cryptodomex
   
 

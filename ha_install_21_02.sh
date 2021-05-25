@@ -238,10 +238,14 @@ wget https://files.pythonhosted.org/packages/37/61/f07226075c347897937d4086ef8e5
 echo "Installing pyqrcode..."
 
 tar -zxf pyqrcode-1.2.1.tar.gz
+echo "Installing pyqrcode...2"
 cd pyqrcode-1.2.1
+echo "Installing pyqrcode..3"
 python3 setup.py install
+echo "Installing pyqrcode..4"
 cd ..                                                                             
 rm -rf pyqrcode-1.2.1 pyqrcode-1.2.1.tar.gz
+echo "Installing pyqrcode...5"
 echo "Installing zigpy-zigate..."
 
 tar -zxf zigpy-zigate-0.7.4.tgz

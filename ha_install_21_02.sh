@@ -107,7 +107,7 @@ distlib==0.3.1
 filelock==3.0.12
 PyJWT==1.7.1
 python-slugify==5.0.0
-# slugify==0.0.1
+slugify==0.0.1
 text-unidecode==1.3
 voluptuous==0.12.1
 voluptuous-serialize==2.4.0
@@ -116,17 +116,17 @@ snitun==0.21.0
 
 # homeassistant manifest requirements
 async-upnp-client==0.16.2
-#====== not installed
+
 #PyQRCode==1.2.1
 pyMetno==0.8.3
 mutagen==1.45.1
 pyotp==2.3.0
 # exist new version
 gTTS==2.2.1
-#====== not installed
-#pyroute2==0.5.18
-#====== not installed
-#aioesphomeapi==2.6.6
+pyroute2==0.5.18
+
+#esphome
+aioesphomeapi==2.6.6
 
 construct==2.10.67
 samsungtvws==1.4.0
@@ -154,7 +154,6 @@ pymeeus==0.5.11
 
 #ssdp
 async-upnp-client==0.16.2
-#async-upnp-client==0.14.13
 
 # xiaomi_gateway3      
 #paho-mqtt==1.5.1
@@ -163,7 +162,6 @@ async-upnp-client==0.16.2
 # coronavirus==1.1.1
 
 # version
-#pyhaversion==3.4.2
 pyhaversion==21.5.0
 pytest-runner==5.3.0
 semantic-version==2.8.5
@@ -186,7 +184,7 @@ samsungtvws==1.4.0
 tuyaha==0.0.9
 
 # mobile_app
-# emoji==0.5.4
+emoji==0.5.4
 
 # bluetooth
 nose==1.3.7

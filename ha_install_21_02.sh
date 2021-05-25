@@ -4,6 +4,12 @@
 
 set -e
 
+OPENWRT_VERSION=${$OPENWRT_VERSION:-"21.02"}
+PYTHON_VERSION="3.9"
+
+HOMEASSISTANT_VERSION="2021.5.5"
+HOMEASSISTANT_FRONTEND_VERSION="20210504.0"
+
 echo "Install base requirements from feed..."
 opkg update
 
@@ -39,7 +45,6 @@ opkg install \
   python3-docutils \
   python3-email \
   python3-gdbm \
-  python3-jsonpath-ng \
   python3-idna \
   python3-jinja2 \
   python3-jmespath \
@@ -76,7 +81,6 @@ opkg install \
   python3-yaml \
   python3-yarl \
   python3-netdisco \
-  python3-paho-mqtt \
   python3-zeroconf \
   python3-pillow \
   python3-qrcode \
@@ -88,13 +92,10 @@ cd /tmp/
 
 echo "Install _distutils_hack..."
 
-wget https://github.com/pypa/setuptools/archive/refs/tags/v57.0.0.tar.gz -O - > setuptools-57.0.0.tar.gz
-tar -zxf setuptools-57.0.0.tar.gz
-cd setuptools-57.0.0
-# mv -f _distutils_hack /usr/lib/python3.9/site-packages
-cd ..                                                                             
-rm -rf setuptools-57.0.0.tar.gz
-rm -rf setuptools-57.0.0
+# add missing _distutils_hack from setuptools
+mkdir -p /usr/lib/python${PYTHON_VERSION}/site-packages/_distutils_hack
+wget https://raw.githubusercontent.com/pypa/setuptools/v56.0.0/_distutils_hack/__init__.py -O /usr/lib/python${PYTHON_VERSION}/site-packages/_distutils_hack/__init__.py
+wget https://raw.githubusercontent.com/pypa/setuptools/v56.0.0/_distutils_hack/override.py -O /usr/lib/python${PYTHON_VERSION}/site-packages/_distutils_hack/override.py
 
 echo "Install base requirements from PyPI..."
 pip3 install wheel
@@ -102,33 +103,41 @@ cat << "EOF" > /tmp/requirements.txt
 awesomeversion==21.5.0
 acme==1.8.0
 appdirs==1.4.4
-astral==1.10.1
+astral==2.2
 atomicwrites==1.4.0
-# attr==0.3.1
 distlib==0.3.1
 filelock==3.0.12
 PyJWT==1.7.1
-jwt==1.2.0
-# python-slugify==5.0.0
+python-slugify==5.0.0
 # slugify==0.0.1
 text-unidecode==1.3
 voluptuous==0.12.1
 voluptuous-serialize==2.4.0
-importlib-metadata
-snitun==0.20
+importlib-metadata==4.0.1
+snitun==0.21.0
 
 # homeassistant manifest requirements
-# PyQRCode==1.2.1
-# pyMetno==0.8.3
+async-upnp-client==0.16.2
+#====== not installed
+#PyQRCode==1.2.1
+pyMetno==0.8.3
 mutagen==1.45.1
 pyotp==2.3.0
+# exist new version
 gTTS==2.2.1
+#====== not installed
+#pyroute2==0.5.18
+#====== not installed
+#aioesphomeapi==2.6.6
+
+construct==2.10.67
+samsungtvws==1.4.0
 
 # telegram
 python-telegram-bot==13.1
 PySocks==1.7.1
 decorator==4.4.2 
-# tornado==6.1
+tornado==6.1
 tzlocal==2.1 
 APScheduler==3.6.3
 
@@ -138,26 +147,31 @@ icmplib==2.0
 # asuswrt
 aioasuswrt==1.3.1
 
-# workday
-# holidays==0.10.4
-# pymeeus==0.4.0
+#wakeomlan
+wakeonlan==2.0.1
 
-# ssdp    async-upnp-client==0.16.2
-async-upnp-client==0.14.13
+# workday
+holidays==0.10.4
+pymeeus==0.5.11
+
+#ssdp
+async-upnp-client==0.16.2
+#async-upnp-client==0.14.13
 
 # xiaomi_gateway3      
-# paho-mqtt==1.5.0
+#paho-mqtt==1.5.1
 
 # coronavirus
 # coronavirus==1.1.1
 
 # version
-pyhaversion==3.4.2
+#pyhaversion==3.4.2
+pyhaversion==21.5.0
 pytest-runner==5.3.0
 semantic-version==2.8.5
 
 # rest
-# jsonpath==0.82
+jsonpath==0.82
 xmltodict==0.12.0
 httpx==0.16.1
 httpcore==0.12.3
@@ -167,7 +181,7 @@ rfc3986==1.4.0
 
 # samsungtv
 websocket-client==0.56.0
-# samsungctl[websocket]==0.7.1
+samsungctl==0.7.1
 samsungtvws==1.4.0
 
 # tuya
@@ -182,7 +196,7 @@ nose==1.3.7
 # pygatt[GATTTOOL]==4.0.5
 mitemp_bt==0.0.3
 # btlewrap==0.0.8
-# typing==3.7.4.3
+typing==3.7.4.3
 
 #yandex_transport
 aioymaps==1.1.0
@@ -193,43 +207,56 @@ protobuf==3.15.8
 
 #scrape
 #  beautifulsoup4==4.9.1
+# beautifulsoup4==4.9.3
+
+#homekit_controller
+aiohomekit==0.2.61
 
 # zha requirements
-# pyserial==3.5
+pyserial==3.4
 # zha-quirks==0.0.51
- zigpy==0.33.0
-# zigpy-zigate==0.7.3
+zha-quirks==0.0.57
+zigpy==0.33.0
+# zigpy-zigate==0.7.4
 EOF
 
 pip3 install -r /tmp/requirements.txt
 
-# show internal serial ports for Xiaomi
-# sed -i 's/ttyXRUSB\*/ttymxc[1-9]/' /usr/lib/python3.9/site-packages/serial/tools/list_ports_linux.py
-# sed -i 's/if info.subsystem != "platform"]/]/' /usr/lib/python3.9/site-packages/serial/tools/list_ports_linux.py
+# show internal serial ports for Xiaomi Gateway
+sed -i 's/ttyXRUSB\*/ttymxc[1-9]/' /usr/lib/python${PYTHON_VERSION}/site-packages/serial/tools/list_ports_linux.py
+sed -i 's/if info.subsystem != "platform"]/]/' /usr/lib/python${PYTHON_VERSION}/site-packages/serial/tools/list_ports_linux.py
 
 # fix deps
-sed -i 's/urllib3<1.25,>=1.20/urllib3<1.26,>=1.20/' /usr/lib/python3.9/site-packages/botocore-1.12.66-py3.9.egg-info/requires.txt
-sed -i 's/botocore<1.13.0,>=1.12.135/botocore<1.13.0,>=1.12.66/' /usr/lib/python3.9/site-packages/boto3-1.9.135-py3.9.egg-info/requires.txt
+sed -i 's/urllib3<1.25,>=1.20/urllib3>=1.20/' /usr/lib/python${PYTHON_VERSION}/site-packages/botocore-*.egg-info/requires.txt
+sed -i 's/botocore<1.13.0,>=1.12.135/botocore<1.13.0,>=1.12.0/' /usr/lib/python${PYTHON_VERSION}/site-packages/boto3-*.egg-info/requires.txt
 
 echo "Download files"
 
 wget https://github.com/pvizeli/pycognito/archive/0.1.4.tar.gz -O - > pycognito-0.1.4.tgz
 wget https://github.com/ctalkington/python-ipp/archive/0.11.0.tar.gz -O - > python-ipp-0.11.0.tgz
-wget https://files.pythonhosted.org/packages/b8/ad/31d10dbad025a8411029c5041129de14f9bb9f66a990de21be0011e19041/python-miio-0.5.4.tar.gz -O - > python-miio-0.5.4.tar.gz
+wget https://pypi.python.org/packages/source/p/python-miio/python-miio-0.5.6.tar.gz -O - > python-miio-0.5.6.tar.gz
 wget https://github.com/zigpy/zigpy-zigate/archive/0.7.4.tar.gz -O - > zigpy-zigate-0.7.4.tgz
+wget https://files.pythonhosted.org/packages/37/61/f07226075c347897937d4086ef8e55f0a62ae535e28069884ac68d979316/PyQRCode-1.2.1.tar.gz -O - > pyqrcode-1.2.1.tar.gz
+echo "Installing pyqrcode..."
+
+tar -zxf pyqrcode-1.2.1.tar.gz
+cd pyqrcode-1.2.1
+python3 setup.py install
+cd ..                                                                             
+rm -rf pyqrcode-1.2.1 pyqrcode-1.2.1.tar.gz
 echo "Installing zigpy-zigate..."
 
 tar -zxf zigpy-zigate-0.7.4.tgz
 cd zigpy-zigate-0.7.4
 python3 setup.py install
 cd ..                                                                             
-rm -rf zigpy-zigate-0.7.4.tgz
+rm -rf zigpy-zigate-0.7.4 zigpy-zigate-0.7.4.tgz
 
 echo "Installing pycognito..."
 
 tar -zxf pycognito-0.1.4.tgz
 cd pycognito-0.1.4
-sed -i 's/boto3>=1.10.49/boto3>=1.9.135/' setup.py
+sed -i 's/boto3>=[0-9\.]*/boto3/' setup.py
 python3 setup.py install
 cd ..                                                                             
 rm -rf pycognito-0.1.4 pycognito-0.1.4.tgz
@@ -237,43 +264,40 @@ rm -rf pycognito-0.1.4 pycognito-0.1.4.tgz
 echo "Installing python-ipp..."
 tar -zxf python-ipp-0.11.0.tgz
 cd python-ipp-0.11.0
-sed -i 's/aiohttp>=3.6.2/aiohttp>=3.5.4/' requirements.txt
-sed -i 's/yarl>=1.4.2/yarl>=1.3.0/' requirements.txt
+sed -i 's/aiohttp>=[0-9\.]*/aiohttp/' requirements.txt
+sed -i 's/yarl>=[0-9\.]*/yarl/' requirements.txt
 python3 setup.py install
 cd ..
 rm -rf python-ipp-0.11.0 python-ipp-0.11.0.tgz
 
-
 echo "Installing python-miio..."
-tar -zxf python-miio-0.5.4.tar.gz
-cd python-miio-0.5.4
+tar -zxf python-miio-0.5.6.tar.gz
+cd python-miio-0.5.6
 sed -i 's/cryptography>=3,<4/cryptography>=2,<4/' setup.py
 find . -type f -exec touch {} +
 python3 setup.py install
 cd ..
-rm -rf python-miio-0.5.4 python-miio-0.5.4.tar.gz
+rm -rf python-miio-0.5.6 python-miio-0.5.6.tar.gz
 pip3 install PyXiaomiGateway==0.13.4
 
 echo "Install hass_nabucasa and ha-frontend..."
-wget https://github.com/NabuCasa/hass-nabucasa/archive/0.43.1.tar.gz -O - > hass-nabucasa-0.43.1.tar.gz
-tar -zxf hass-nabucasa-0.43.1.tar.gz
-cd hass-nabucasa-0.43.1
+wget https://github.com/NabuCasa/hass-nabucasa/archive/0.43.0.tar.gz -O - > hass-nabucasa-0.43.0.tar.gz
+tar -zxf hass-nabucasa-0.43.0.tar.gz
+cd hass-nabucasa-0.43.0
 sed -i 's/==.*"/"/' setup.py
 sed -i 's/>=.*"/"/' setup.py
 python3 setup.py install
 cd ..
-rm -rf hass-nabucasa-0.43.1.tar.gz hass-nabucasa-0.43.1
+rm -rf hass-nabucasa-0.43.0.tar.gz hass-nabucasa-0.43.0
 
 # tmp might be small for frontend
 cd /root
-rm -rf home-assistant-frontend-20210518.0.tar.gz
-rm -rf home-assistant-frontend-20210518.0
+rm -rf home-assistant-frontend.tar.gz
+rm -rf home-assistant-frontend-${HOMEASSISTANT_FRONTEND_VERSION}
 
-# wget https://files.pythonhosted.org/packages/9c/49/7c0e3890da95fbf3c287a6f0568fcbec9112e5c4264910e712e4fd2622d1/home-assistant-frontend-20210518.0.tar.gz -O home-assistant-frontend-20210518.0.tar.gz
-wget https://files.pythonhosted.org/packages/5d/04/35f06c52b6d00dc104479d0fa7e425f790c5612bfc407cd2edf85d1ce4ae/home-assistant-frontend-20210504.0.tar.gz -O home-assistant-frontend-20210504.0.tar.gz
-
-tar -zxf home-assistant-frontend-20210504.0.tar.gz
-cd home-assistant-frontend-20210504.0
+wget https://pypi.python.org/packages/source/h/home-assistant-frontend/home-assistant-frontend-${HOMEASSISTANT_FRONTEND_VERSION}.tar.gz -O home-assistant-frontend.tar.gz
+tar -zxf home-assistant-frontend.tar.gz
+cd home-assistant-frontend-${HOMEASSISTANT_FRONTEND_VERSION}
 find ./hass_frontend/frontend_es5 -name '*.js' -exec rm -rf {} \;
 find ./hass_frontend/frontend_es5 -name '*.map' -exec rm -rf {} \;
 find ./hass_frontend/frontend_es5 -name '*.txt' -exec rm -rf {} \;
@@ -286,29 +310,29 @@ find ./hass_frontend/static/polyfills -name '*.js' -maxdepth 1 -exec rm -rf {} \
 find ./hass_frontend/static/polyfills -name '*.map' -maxdepth 1 -exec rm -rf {} \;
 
 # shopping list and calendar missing gzipped
-gzip ./hass_frontend/static/translations/calendar/*
+# gzip ./hass_frontend/static/translations/calendar/*
 gzip ./hass_frontend/static/translations/shopping_list/*
 
 find ./hass_frontend/static/translations -name '*.json' -exec rm -rf {} \;
 
-rm -rf /usr/lib/python3.9/site-packages/hass_frontend
-mv -f hass_frontend /usr/lib/python3.9/site-packages/hass_frontend
+# rm -rf /usr/lib/python3.9/site-packages/hass_frontend
+mv hass_frontend /usr/lib/python${PYTHON_VERSION}/site-packages/hass_frontend
 
-find /root/home-assistant-frontend-20210504.0/ -type f -exec touch -t 201601011200 '{}' \;
+# find /root/home-assistant-frontend-20210504.0/ -type f -exec touch -t 201601011200 '{}' \;
 
 python3 setup.py install
 cd ..
-rm -rf home-assistant-frontend-20210504.0.tar.gz home-assistant-frontend-20210504.0
+rm -rf home-assistant-frontend.tar.gz home-assistant-frontend-${HOMEASSISTANT_FRONTEND_VERSION}
 cd /tmp
 
-rm -rf homeassistant-2021.5.5.tar.gz
-rm -rf homeassistant-2021.5.5
+rm -rf homeassistant.tar.gz
+rm -rf homeassistant-${HOMEASSISTANT_VERSION}
 
 echo "Install HASS"
-wget https://files.pythonhosted.org/packages/21/d1/431197d2a6f74807cd7f69caa91e11d619cb47a1fde687abfdd812a4c4b1/homeassistant-2021.5.5.tar.gz -O - > /tmp/homeassistant-2021.5.5.tar.gz
-tar -zxf homeassistant-2021.5.5.tar.gz
-rm -rf homeassistant-2021.5.5.tar.gz
-cd homeassistant-2021.5.5/homeassistant/
+wget https://pypi.python.org/packages/source/h/homeassistant/homeassistant-${HOMEASSISTANT_VERSION}.tar.gz -O homeassistant.tar.gz
+tar -zxf homeassistant.tar.gz
+rm -rf homeassistant.tar.gz
+cd homeassistant-${HOMEASSISTANT_VERSION}/homeassistant/
 echo '' > requirements.txt
 
 mv -f components components-orig
@@ -347,6 +371,7 @@ mv -f \
   google_translate \
   group \
   hassio \
+  homekit_controller \
   history \
   trace \
   homeassistant \
@@ -441,21 +466,21 @@ cd components
 # serve static with gzipped files
 sed -i 's/filepath = self._directory.joinpath(filename).resolve()/try:\n                filepath = self._directory.joinpath(Path(rel_url + ".gz")).resolve()\n                if not filepath.exists():\n                    raise FileNotFoundError()\n            except Exception as e:\n                filepath = self._directory.joinpath(filename).resolve()/' http/static.py
 
-sed -i 's/sqlalchemy==1.3.23/sqlalchemy/' recorder/manifest.json
-sed -i 's/pillow==8.1.0/pillow/' image/manifest.json
+sed -i 's/sqlalchemy==[0-9\.]*/sqlalchemy/' recorder/manifest.json
+sed -i 's/pillow==[0-9\.]*/pillow/' image/manifest.json
 sed -i 's/, UnidentifiedImageError//' image/__init__.py
 sed -i 's/except UnidentifiedImageError/except OSError/' image/__init__.py
-sed -i 's/zeroconf==0.28.8/zeroconf/' zeroconf/manifest.json
-sed -i 's/netdisco==2.8.2/netdisco/' discovery/manifest.json
-sed -i 's/PyNaCl==1.3.0/PyNaCl/' mobile_app/manifest.json
-sed -i 's/"defusedxml==0.6.0", "netdisco==2.8.2"/"defusedxml", "netdisco"/' ssdp/manifest.json
+sed -i 's/zeroconf==[0-9\.]*/zeroconf/' zeroconf/manifest.json
+sed -i 's/netdisco==[0-9\.]*/netdisco/' discovery/manifest.json
+sed -i 's/PyNaCl==[0-9\.]*/PyNaCl/' mobile_app/manifest.json
+sed -i 's/"defusedxml==[0-9\.]*", "netdisco==[0-9\.]*"/"defusedxml", "netdisco"/' ssdp/manifest.json
 # remove unwanted zha requirements
-sed -i 's/"bellows==0.21.0",//' zha/manifest.json
-sed -i 's/"zigpy-cc==0.5.2",//' zha/manifest.json
-sed -i 's/"zigpy-deconz==0.11.1",//' zha/manifest.json
-sed -i 's/"zigpy-xbee==0.13.0",//' zha/manifest.json
-sed -i 's/"zigpy-znp==0.3.0"//' zha/manifest.json
-sed -i 's/"zigpy-zigate==0.7.3",/"zigpy-zigate"/' zha/manifest.json
+sed -i 's/"bellows==[0-9\.]*",//' zha/manifest.json
+sed -i 's/"zigpy-cc==[0-9\.]*",//' zha/manifest.json
+sed -i 's/"zigpy-deconz==[0-9\.]*",//' zha/manifest.json
+sed -i 's/"zigpy-xbee==[0-9\.]*",//' zha/manifest.json
+sed -i 's/"zigpy-znp==[0-9\.]*"//' zha/manifest.json
+sed -i 's/"zigpy-zigate==[0-9\.]*",/"zigpy-zigate"/' zha/manifest.json
 sed -i 's/import bellows.zigbee.application//' zha/core/const.py
 sed -i 's/import zigpy_cc.zigbee.application//' zha/core/const.py
 sed -i 's/import zigpy_deconz.zigbee.application//' zha/core/const.py
@@ -464,6 +489,7 @@ sed -i 's/import zigpy_znp.zigbee.application//' zha/core/const.py
 sed -i -e '/znp = (/,/)/d' -e '/ezsp = (/,/)/d' -e '/deconz = (/,/)/d' -e '/ti_cc = (/,/)/d' -e '/xbee = (/,/)/d' zha/core/const.py
 
 sed -i 's/"cloud",//' default_config/manifest.json
+sed -i 's/"dhcp",//' default_config/manifest.json
 sed -i 's/"mobile_app",//' default_config/manifest.json
 sed -i 's/"updater",//' default_config/manifest.json
 
@@ -471,14 +497,20 @@ cd ../..
 sed -i 's/    "/    # "/' homeassistant/generated/config_flows.py
 sed -i 's/    # "mqtt"/    "mqtt"/' homeassistant/generated/config_flows.py
 sed -i 's/    # "zha"/    "zha"/' homeassistant/generated/config_flows.py
+sed -i 's/    # "esphome"/    "esphome"/' homeassistant/generated/config_flows.py
 
+sed -i 's/"installation_type": "Unknown"/"installation_type": "Home Assistant on OpenWrt"/' homeassistant/helpers/system_info.py
 sed -i 's/install_requires=REQUIRES/install_requires=[]/' setup.py
 
-find /tmp/homeassistant-2021.5.5/ -type f -exec touch -t 201601011200 '{}' \;
+sed -i 's/session.get_transaction()/session.transaction/' homeassistant/components/recorder/util.py
+
+# Change file timestamp
+#find /tmp/homeassistant-${HOMEASSISTANT_VERSION}/ -type f -exec touch -t 201601011200 '{}' \;
+find . -type f -exec touch {} +
 
 python3 setup.py install
 cd ../
-rm -rf homeassistant-2021.5.5/
+rm -rf homeassistant-${HOMEASSISTANT_VERSION}/
 
 mkdir -p /etc/homeassistant
 ln -s /etc/homeassistant /root/.homeassistant
@@ -492,7 +524,7 @@ tts:
     language: ru
 
 recorder:
-  purge_keep_days: 3
+  purge_keep_days: 1
   db_url: 'sqlite:///:memory:'
 
 group: !include groups.yaml
@@ -524,7 +556,9 @@ start_service()
 EOF
 chmod +x /etc/init.d/homeassistant
 /etc/init.d/homeassistant enable
+/etc/init.d/homeassistant start
 
+# pip3 uninstall JWT
 echo "Done."
 
 # Замена в файле components\recorder\util.py  if session.get_transaction(): на         if session.transaction:

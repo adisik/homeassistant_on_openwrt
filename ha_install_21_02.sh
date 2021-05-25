@@ -82,9 +82,9 @@ opkg install \
   python3-zeroconf \
   python3-pillow \
   python3-qrcode \
-  python3-bluepy \
   python3-cryptodomex
   
+opkg install python3-bluepy
 
 cd /tmp/
 

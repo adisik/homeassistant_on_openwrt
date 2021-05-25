@@ -1,13 +1,10 @@
 #!/bin/sh
-# Homeassistant installer script by @devbis
+# Homeassistant installer script by @devbis  mod adisik
 # wget https://raw.githubusercontent.com/adisik/homeassistant_on_openwrt/main/ha_install_21_02.sh -O - | sh
 
 set -e
 
-
-OPENWRT_VERSION="21.02"
 PYTHON_VERSION="3.9"
-
 HOMEASSISTANT_VERSION="2021.5.5"
 HOMEASSISTANT_FRONTEND_VERSION="20210504.0"
 

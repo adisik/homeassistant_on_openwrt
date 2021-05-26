@@ -120,7 +120,7 @@ pyMetno==0.8.3
 mutagen==1.45.1
 pyotp==2.3.0
 # exist new version
-gTTS==2.2.1
+gTTS==2.2.2
 pyroute2==0.5.18
 
 #esphome

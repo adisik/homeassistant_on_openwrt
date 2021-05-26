@@ -55,14 +55,12 @@ opkg install \
   python3-ncurses \
   python3-netifaces \
   python3-openssl \
-  python3-paho-mqtt \
   python3-pip \
   python3-pkg-resources \
   python3-ply \
   python3-pycparser \
   python3-pydoc \
   python3-pyopenssl \
-  python3-pyserial \
   python3-pytz \
   python3-requests \
   python3-s3transfer \
@@ -117,7 +115,7 @@ snitun==0.21.0
 # homeassistant manifest requirements
 async-upnp-client==0.16.2
 
-#PyQRCode==1.2.1
+PyQRCode==1.2.1
 pyMetno==0.8.3
 mutagen==1.45.1
 pyotp==2.3.0
@@ -155,8 +153,8 @@ pymeeus==0.5.11
 #ssdp
 async-upnp-client==0.16.2
 
-# xiaomi_gateway3      
-#paho-mqtt==1.5.1
+# xiaomi_gateway3
+paho-mqtt==1.5.1
 
 # coronavirus
 # coronavirus==1.1.1
@@ -189,7 +187,7 @@ emoji==0.5.4
 # bluetooth
 nose==1.3.7
 # coverage==3.7.1
-# pygatt[GATTTOOL]==4.0.5
+pygatt[GATTTOOL]==4.0.5
 mitemp_bt==0.0.3
 # btlewrap==0.0.8
 typing==3.7.4.3
@@ -202,25 +200,23 @@ aioesphomeapi==2.6.3
 protobuf==3.15.8
 
 #scrape
-#  beautifulsoup4==4.9.1
-# beautifulsoup4==4.9.3
+beautifulsoup4==4.9.3
 
 #homekit_controller
 aiohomekit==0.2.61
 
 # zha requirements
-pyserial==3.4
-# zha-quirks==0.0.51
+pyserial==3.5
 zha-quirks==0.0.57
 zigpy==0.33.0
-# zigpy-zigate==0.7.4
+zigpy-zigate==0.7.4
 EOF
 
 pip3 install -r /tmp/requirements.txt
 
 # show internal serial ports for Xiaomi Gateway
-# sed -i 's/ttyXRUSB\*/ttymxc[1-9]/' /usr/lib/python${PYTHON_VERSION}/site-packages/serial/tools/list_ports_linux.py
-# sed -i 's/if info.subsystem != "platform"]/]/' /usr/lib/python${PYTHON_VERSION}/site-packages/serial/tools/list_ports_linux.py
+sed -i 's/ttyXRUSB\*/ttymxc[1-9]/' /usr/lib/python${PYTHON_VERSION}/site-packages/serial/tools/list_ports_linux.py
+sed -i 's/if info.subsystem != "platform"]/]/' /usr/lib/python${PYTHON_VERSION}/site-packages/serial/tools/list_ports_linux.py
 
 # fix deps
 sed -i 's/urllib3<1.25,>=1.20/urllib3>=1.20/' /usr/lib/python${PYTHON_VERSION}/site-packages/botocore-*.egg-info/requires.txt
@@ -231,22 +227,6 @@ echo "Download files"
 wget https://github.com/pvizeli/pycognito/archive/0.1.4.tar.gz -O - > pycognito-0.1.4.tgz
 wget https://github.com/ctalkington/python-ipp/archive/0.11.0.tar.gz -O - > python-ipp-0.11.0.tgz
 wget https://pypi.python.org/packages/source/p/python-miio/python-miio-0.5.6.tar.gz -O - > python-miio-0.5.6.tar.gz
-wget https://github.com/zigpy/zigpy-zigate/archive/0.7.4.tar.gz -O - > zigpy-zigate-0.7.4.tgz
-wget https://files.pythonhosted.org/packages/37/61/f07226075c347897937d4086ef8e55f0a62ae535e28069884ac68d979316/PyQRCode-1.2.1.tar.gz -O - > pyqrcode-1.2.1.tar.gz
-echo "Installing pyqrcode..."
-
-tar -zxf pyqrcode-1.2.1.tar.gz
-cd PyQRCode-1.2.1
-python3 setup.py install
-cd ..                                                                             
-rm -rf PyQRCode-1.2.1 pyqrcode-1.2.1.tar.gz
-echo "Installing zigpy-zigate..."
-
-tar -zxf zigpy-zigate-0.7.4.tgz
-cd zigpy-zigate-0.7.4
-python3 setup.py install
-cd ..                                                                             
-rm -rf zigpy-zigate-0.7.4 zigpy-zigate-0.7.4.tgz
 
 echo "Installing pycognito..."
 

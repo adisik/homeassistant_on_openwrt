@@ -196,8 +196,8 @@ typing==3.7.4.3
 aioymaps==1.1.0
 
 #esphome
-aioesphomeapi==2.6.3
-protobuf==3.15.8
+protobuf==3.17.1
+aioesphomeapi==2.6.6
 
 #scrape
 beautifulsoup4==4.9.3

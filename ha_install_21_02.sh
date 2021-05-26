@@ -76,7 +76,6 @@ opkg install \
   python3-xml \
   python3-yaml \
   python3-yarl \
-  python3-netdisco \
   python3-zeroconf \
   python3-pillow \
   python3-qrcode \
@@ -204,6 +203,9 @@ beautifulsoup4==4.9.3
 
 #homekit_controller
 aiohomekit==0.2.61
+
+# other
+netdisco==2.8.2
 
 # zha requirements
 pyserial==3.5

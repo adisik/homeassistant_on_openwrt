@@ -10,7 +10,7 @@ It is distributed with a shell script that downloads and installs everything tha
 ### Requirements:
 - 120 MB storage space (256 recommended)
 - 128 MB RAM
-- OpenWrt 19.07 installed
+- OpenWrt 19.07, 21.02 rc2 installed
 
 
 ## Xiaomi Gateway installation

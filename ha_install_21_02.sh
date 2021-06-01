@@ -183,7 +183,7 @@ samsungtvws==1.4.0
 tuyaha==0.0.9
 
 # mobile_app
-emoji==0.5.4
+emoji==1.2.0
 
 # bluetooth
 nose==1.3.7

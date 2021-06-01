@@ -74,7 +74,7 @@ shell_command
 telnet
 time_data
 tod
-tyua
+tuya
 wake_on_lan
 uptime
 workday

@@ -477,8 +477,15 @@ sed -i 's/"updater",//' default_config/manifest.json
 
 cd ../..
 sed -i 's/    "/    # "/' homeassistant/generated/config_flows.py
+sed -i 's/    # "asuswrt"/    "asuswrt"/' homeassistant/generated/config_flows.py
+sed -i 's/    # "local_ip"/    "local_ip"/' homeassistant/generated/config_flows.py
+sed -i 's/    # "mobile_app"/    "mobile_app"/' homeassistant/generated/config_flows.py
 sed -i 's/    # "mqtt"/    "mqtt"/' homeassistant/generated/config_flows.py
 sed -i 's/    # "zha"/    "zha"/' homeassistant/generated/config_flows.py
+sed -i 's/    # "upnp"/    "upnp"/' homeassistant/generated/config_flows.py
+sed -i 's/    # "tuya"/    "tuya"/' homeassistant/generated/config_flows.py
+sed -i 's/    # "samsungtv"/    "samsungtv"/' homeassistant/generated/config_flows.py
+sed -i 's/    # "homekit_controller"/    "homekit_controller"/' homeassistant/generated/config_flows.py
 sed -i 's/    # "esphome"/    "esphome"/' homeassistant/generated/config_flows.py
 
 sed -i 's/"installation_type": "Unknown"/"installation_type": "Home Assistant on OpenWrt"/' homeassistant/helpers/system_info.py

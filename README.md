@@ -51,36 +51,44 @@ wget https://raw.githubusercontent.com/adisik/homeassistant_on_openwrt/main/ha_i
  - asuswrt
  - bluetooth_le_tracker
  - command_line
-coronavirus
-dhcp
-file
-filter
-generic
-homekit_controller
-trace
-local_ip
-moon
-min_max
-panel_iframe
-ping
-remote
-rest
-rest_command
-samsungtv
-scrape
-statistics
-systemmonitor
-shell_command
-telnet
-time_data
-tod
-tuya
-wake_on_lan
-uptime
-workday
-version
-yandex_transport
+ - coronavirus
+ - dhcp
+ - file
+ - filter
+ - generic
+ - homekit_controller
+ - trace
+ - local_ip
+ - moon
+ - min_max
+ - panel_iframe
+ - ping
+ - remote
+ - rest
+ - rest_command
+ - samsungtv
+ - scrape
+ - statistics
+ - systemmonitor
+ - shell_command
+ - telnet
+ - time_data
+ - tod
+ - tuya
+ - wake_on_lan
+ - uptime
+ - workday
+ - version
+ - yandex_transport
 
+## Installing and work the following custom components:
+ - https://github.com/AlexxIT/XiaomiGateway3
+ - https://github.com/AlexxIT/SonoffLAN
+ - https://github.com/AlexxIT/YandexStation
+ - https://github.com/custom-components/ble_monitor (need rebuild python3-light with Bluetooth support)
+ - https://github.com/Limych/ha-gismeteo
+ - https://github.com/ArtistAOP/localtuya
+ - https://github.com/AlexxIT/Dataplicity
 
 
 After script prints `Done.` you have Home Assistant installed. 

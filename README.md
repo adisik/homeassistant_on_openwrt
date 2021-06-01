@@ -48,9 +48,9 @@ wget https://raw.githubusercontent.com/adisik/homeassistant_on_openwrt/main/ha_i
 
 ## Additionally included the following Home Assistant components:
 
-asuswrt
-bluetooth_le_tracker
-command_line
+ - asuswrt
+ - bluetooth_le_tracker
+ - command_line
 coronavirus
 dhcp
 file

@@ -46,7 +46,7 @@ or
 wget https://raw.githubusercontent.com/adisik/homeassistant_on_openwrt/main/ha_install_21_02.sh -O - | sh
 ```
 
-Additionally included the following Home Assistant components:
+## Additionally included the following Home Assistant components:
 
 asuswrt
 bluetooth_le_tracker

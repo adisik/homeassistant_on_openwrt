@@ -69,6 +69,7 @@ rest_command
 samsungtv
 scrape
 statistics
+systemmonitor
 shell_command
 telnet
 time_data

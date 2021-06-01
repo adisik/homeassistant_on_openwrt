@@ -62,6 +62,7 @@ opkg install \
   python3-pycparser \
   python3-pydoc \
   python3-pyopenssl \
+  python3-psutil \
   python3-pytz \
   python3-requests \
   python3-s3transfer \
@@ -402,6 +403,7 @@ mv -f \
   safe_mode \
   system_health \
   system_log \
+  systemmonitor \
   shell_command \
   timer \
   telnet \

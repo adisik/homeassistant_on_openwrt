@@ -46,6 +46,42 @@ or
 wget https://raw.githubusercontent.com/adisik/homeassistant_on_openwrt/main/ha_install_21_02.sh -O - | sh
 ```
 
+Additionally included the following Home Assistant components:
+
+asuswrt
+bluetooth_le_tracker
+command_line
+coronavirus
+dhcp
+file
+filter
+generic
+homekit_controller
+trace
+local_ip
+moon
+min_max
+panel_iframe
+ping
+remote
+rest
+rest_command
+samsungtv
+scrape
+statistics
+shell_command
+telnet
+time_data
+tod
+tyua
+wake_on_lan
+uptime
+workday
+version
+yandex_transport
+
+
+
 After script prints `Done.` you have Home Assistant installed. 
 Start the service or reboot the device to get it start automatically.
 The web interface will be on 8123 port after all components load.

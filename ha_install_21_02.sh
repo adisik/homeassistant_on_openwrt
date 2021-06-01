@@ -18,6 +18,7 @@ opkg install \
   python3-ciso8601
 
 opkg install \
+  patch \
   python3-aiohttp \
   python3-aiohttp-cors \
   python3-async-timeout \
@@ -81,7 +82,7 @@ opkg install \
   python3-qrcode \
   python3-cryptodomex
   
-opkg install python3-bluepy
+# opkg install python3-bluepy
 
 cd /tmp/
 
@@ -398,6 +399,7 @@ mv -f \
   sun \
   switch \
   statistics \
+  safe_mode \
   system_health \
   system_log \
   shell_command \

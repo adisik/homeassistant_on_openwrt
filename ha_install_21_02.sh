@@ -175,9 +175,9 @@ h11==0.12.0
 rfc3986==1.4.0
 
 # samsungtv
-websocket-client==0.56.0
+websocket-client==1.0.1
 samsungctl==0.7.1
-samsungtvws==1.4.0
+samsungtvws==1.6.0
 
 # tuya
 tuyaha==0.0.9
@@ -214,6 +214,9 @@ pyserial==3.5
 zha-quirks==0.0.57
 zigpy==0.33.0
 zigpy-zigate==0.7.4
+
+# fixed dependencies
+python-jose[cryptography]==3.2.0  # 3.3.0 is not compatible with the python3-cryptography in the feed
 EOF
 
 pip3 install -r /tmp/requirements.txt

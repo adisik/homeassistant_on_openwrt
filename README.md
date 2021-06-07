@@ -88,7 +88,8 @@ wget https://raw.githubusercontent.com/adisik/homeassistant_on_openwrt/main/ha_i
  - https://github.com/custom-components/ble_monitor (need rebuild python3-light with Bluetooth support)
  - https://github.com/Limych/ha-gismeteo
  - https://github.com/ArtistAOP/localtuya
- - https://github.com/AlexxIT/Dataplicity
+ - https://github.com/AlexxIT/Dataplicity       
+ - https://github.com/RobHofmann/HomeAssistant-GreeClimateComponent
 
 
 After script prints `Done.` you have Home Assistant installed. 
@@ -123,9 +124,13 @@ must be 115200 as it is hardcoded in zigpy-zigate.
 
 ## Enabling other components and installing custom
 
+
 You may want to add more components to your HA installation.
 In this case you have to copy the directory with component to 
+# Openwrt 19.07
 `/usr/lib/python3.7/site-packages/homeassistant-2021.1.5-py3.7.egg/homeassistant/components/`
+# Openwrt 21.02
+`/usr/lib/python3.9/site-packages/homeassistant-2021.5.5-py3.9.egg/homeassistant/components/`
 
 or create `custom_components` directory in `/etc/homeassistant` and
 copy it there.
@@ -134,3 +139,4 @@ Try to install requirements from `manifest.json` with `pip3` manually
 to check it installs and doesn't require pre-compiled C libraries.
 Otherwise, you have to cross-compile python3 dependencies and install
 them as `ipk` packages.
+

@@ -19,6 +19,7 @@ opkg install \
 
 opkg install \
   patch \
+  ffmpeg \
   python3-aiohttp \
   python3-aiohttp-cors \
   python3-async-timeout \

@@ -54,13 +54,15 @@ wget https://raw.githubusercontent.com/adisik/homeassistant_on_openwrt/main/ha_i
  - coronavirus
  - dhcp
  - file
- - filter
+ - filter    
+ - ffmpeg
  - generic
  - homekit_controller
  - trace
  - local_ip
  - moon
  - min_max
+ - onvif
  - panel_iframe
  - ping
  - remote

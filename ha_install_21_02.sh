@@ -81,6 +81,7 @@ opkg install \
   python3-zeroconf \
   python3-pillow \
   python3-qrcode \
+  python3-lxml \
   python3-cryptodomex
   
 # opkg install python3-bluepy
@@ -205,6 +206,13 @@ beautifulsoup4==4.9.3
 
 #homekit_controller
 aiohomekit==0.2.61
+
+#onvif
+onvif-zeep-async==1.0.0
+WSDiscovery==2.0.0
+
+#ffmpeg
+ha-ffmpeg==3.0.2
 
 # other
 netdisco==2.8.2
@@ -347,6 +355,7 @@ mv -f \
   esphome \
   fan \
   file\
+  ffmpeg \
   filter \
   frontend \
   generic \
@@ -383,6 +392,7 @@ mv -f \
   notify \
   number \
   onboarding \
+  onvif \
   persistent_notification \
   panel_iframe \
   person \
@@ -486,6 +496,7 @@ sed -i 's/    # "mobile_app"/    "mobile_app"/' homeassistant/generated/config_f
 sed -i 's/    # "mqtt"/    "mqtt"/' homeassistant/generated/config_flows.py
 sed -i 's/    # "zha"/    "zha"/' homeassistant/generated/config_flows.py
 sed -i 's/    # "upnp"/    "upnp"/' homeassistant/generated/config_flows.py
+sed -i 's/    # "onvif"/    "onvif"/' homeassistant/generated/config_flows.py
 sed -i 's/    # "tuya"/    "tuya"/' homeassistant/generated/config_flows.py
 sed -i 's/    # "samsungtv"/    "samsungtv"/' homeassistant/generated/config_flows.py
 sed -i 's/    # "homekit_controller"/    "homekit_controller"/' homeassistant/generated/config_flows.py

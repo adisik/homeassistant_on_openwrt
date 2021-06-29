@@ -81,7 +81,8 @@ wget https://raw.githubusercontent.com/adisik/homeassistant_on_openwrt/main/ha_i
  - https://github.com/Limych/ha-gismeteo
  - https://github.com/ArtistAOP/localtuya
  - https://github.com/AlexxIT/Dataplicity       
- - https://github.com/RobHofmann/HomeAssistant-GreeClimateComponent
+ - https://github.com/RobHofmann/HomeAssistant-GreeClimateComponent      
+ - https://github.com/custom-components/remote_homeassistant
 
 
 After script prints `Done.` you have Home Assistant installed. 
